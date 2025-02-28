@@ -1,0 +1,231 @@
+@import url('./carousel.css');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Variables */
+:root {
+    --header-grey: #121212;
+    --primary-bg: #000000;
+    --primary-white: #ffffff;
+    --primary-grey: #1A1A1A;
+    --text-yellow: #F5C518;
+}
+
+/* Base */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    color: white;
+    margin: 1rem;
+    font-size: 2rem;
+}
+
+h2 {
+    text-align: center;
+    color: var(--primary-white);
+    margin: 1rem;
+}
+
+p {
+    color: var(--primary-white);
+}
+
+body {
+    background-color: var(--primary-bg);
+    max-width: 100%;
+}
+
+a:hover {
+    color: var(--primary-white);
+}
+
+/* Utils */
+.content-wrapper {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.d-none {
+    display: none;
+}
+
+.header {
+    background-color: var(--header-grey);
+    width: 100%;
+    padding: 1.5rem;
+    z-index: 999;
+}
+
+.header__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__logo {
+    width: 150px;
+    background-color: var(--text-yellow);
+}
+
+.header__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.header__input {
+    width: 50%;
+    padding: 1rem;
+    border-radius: 2rem 0 0 2rem;
+    border: none;
+}
+
+.header__form-btn {
+    border-radius: 0 2rem 2rem 0;
+    width: 5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.header__fav-btn {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: var(--text-yellow);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Större marginal på sidorna för movie-cards-container */
+#movie-cards-container {
+    margin: 0 100px;
+}
+
+/* CSS för att hantera filmkorten */
+#movie-cards-container,
+#cardContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    margin: 0 50px;
+}
+
+.movie-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--primary-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s ease;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    padding: 10px;
+    /* Lägg till padding för att ge lite utrymme runt texten */
+}
+
+/* För att göra kortet större när man hovrar */
+.movie-card:hover {
+    transform: scale(1.05);
+}
+
+.movie-information {
+    margin: 1rem;
+    text-align: center;
+}
+
+.movie-information p {
+    margin: .5rem 20rem;
+}
+
+/* BUTTONS */
+
+/* Stjärnknapp som ligger i övre högra hörnet */
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    color: var(--primary-white);
+    transition: transform 0.3s ease, color 0.3s ease;
+    /* Lägg till transform */
+    z-index: 1;
+}
+
+.favorite-btn.filled {
+    color: var(--text-yellow)
+}
+
+.favorite-btn:hover {
+    color: #ff9a00;
+    transform: scale(1.2);
+    /* Gör stjärnan större vid hover */
+}
+
+
+
+
+/* Responsiv layout för olika skärmstorlekar */
+@media (max-width: 1200px) {
+
+    #movie-cards-container,
+    #cardContainer {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+
+    #movie-cards-container,
+    #cardContainer {
+        grid-template-columns: repeat(3, 1fr);
+        margin: 0;
+    }
+
+    .movie-information p {
+        margin: .5rem 10rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    #movie-cards-container,
+    #cardContainer {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 0 20px;
+    }
+
+    .movie-information p {
+        margin: .5rem 5rem;
+    }
+}
+
+@media (max-width: 400px) {
+
+    #movie-cards-container,
+    #cardContainer {
+        grid-template-columns: 1fr;
+        margin: 0 10px;
+
+    }
+
+    .movie-information p {
+        margin: .5rem .5rem;
+    }
+}
