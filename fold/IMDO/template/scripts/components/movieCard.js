@@ -1,7 +1,39 @@
-import { saveToFavorites, removeFromFavorites } from './favorites.js';
+import { saveToFavorites } from './favorites.js';
 
 
 const missingImage = './IMDO/template/res/missing-poster.jpg';  // Backup image
+
+// movie class
+export class Movie {
+    constructor(data) {
+        this.title = data.title;
+        this.year = data.year;
+        this.imdbID = data.imdbID;
+        this.posterUrl = data.Poster;
+        this.plot = data.Plot;
+    }
+
+    // get movie details
+    getTitle() {
+        return this.title;
+    }
+
+    getYear() {
+        return this.year;
+    }
+
+    getImdbID() {
+        return this.imdbID;
+    }
+
+    getPoster() {
+        return this.posterUrl;
+    }
+
+    getPlot() {
+        return this.plot;
+    }
+}
 
 // movie card function
 export function createMovieCard(movieData) {
@@ -88,7 +120,12 @@ export async function renderFavorites() {
     });
 }
 
-
+// Remove movie from favorites
+function removeFromFavorites(imdbID) {
+    let favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
+    favorites = favorites.filter(movie => movie.imdbID !== imdbID); // at bort movie efter imdbID
+    localStorage.setItem("favoriteMovies", JSON.stringify(favorites));
+}
 
 
 export function updateFavoriteButtons() {
