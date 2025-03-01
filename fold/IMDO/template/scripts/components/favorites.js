@@ -36,7 +36,6 @@ export function saveToFavorites(movieData) {
     }
 
     saveFavoritesToStorage(favorites);
-    renderFavorites();
 }
 
 // Funktion för att rendera favoriter på sidan
@@ -57,6 +56,14 @@ export function renderFavorites() {
         container.appendChild(card);
     });
 
+    container.addEventListener('click', (event) => {
+        if (event.target && event.target.classList.contains('remove-btn')) {
+            const card = event.target.closest('.movie-card');
+            const imdbID = card.getAttribute('data-imdbid');
+            removeFromFavorites(imdbID);  // Ta bort från favoriter
+            card.remove();  // Ta bort kort från DOM
+        }
+    });
 }
 
 // Funktion för att ta bort film från favoriter
@@ -64,7 +71,6 @@ export function removeFromFavorites(imdbID) {
     let favorites = getFavoritesFromStorage();
     favorites = favorites.filter(movie => movie.imdbID !== imdbID);
     saveFavoritesToStorage(favorites);
-    renderFavorites();
 }
 
 // Funktion för att skapa kort för favoriter
@@ -78,11 +84,7 @@ export function createFavoriteCard(movieData) {
         <h3>${movieData.title} (${movieData.year})</h3>
         <button class="remove-btn">Ta bort från favoriter</button>
     `;
-    // Lägg till eventlyssnare för remove-knappen
-    const removeButton = card.querySelector('.remove-btn');
-    removeButton.addEventListener('click', () => {
-        removeFromFavorites(movieData.imdbID);
-    });
+
     return card;
 }
 
@@ -102,13 +104,6 @@ export function updateFavoriteButtonStatus(movie) {
         }
     }
 }
-
-// Kontrollera om filmen är en favorit
-export function isMovieFavorite(imdbID) {
-    const favorites = JSON.parse(localStorage.getItem("favoriteMovies")) || [];
-    return favorites.some(movie => movie.imdbID === imdbID);
-}
-
 
 // Kontrollera om filmen är en favorit
 export function isMovieFavorite(imdbID) {
