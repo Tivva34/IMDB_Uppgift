@@ -3,9 +3,6 @@ import { saveToFavorites, removeFromFavorites } from './favorites.js';
 
 const missingImage = './IMDO/template/res/missing-poster.jpg';  // Backup image
 
-// movie class
-
-
 // movie card function
 export function createMovieCard(movieData) {
     const card = document.createElement("div");
